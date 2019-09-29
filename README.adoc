@@ -1,12 +1,8 @@
-= Spring Boot Example with Camel REST DSL and Swagger
+= Camel Content enricher 
 
 == Introduction
 
-This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel]. It provides a simple REST service that is created with http://camel.apache.org/rest-dsl.html[Camel REST DSL] and documented with http://swagger.io[Swagger].
-
-The project uses the `camel-spring-boot-starter` dependency, a Spring Boot starter dependency for Camel that simplifies the Maven configuration. 
-
-The project also uses `camel-servlet` component as the HTTP transport component for Camel REST DSL.
+This example shows how camel content enricher EAIP can be used to enrich data between APIs. User Rest end point uses  service spring to retrive user information and address rest  service to retrive address for the user. 
 
 == Build
 
@@ -24,61 +20,80 @@ You should see the following output when the application is launched:
 
 [source,text]
 ----
-...
-[INFO] --- spring-boot-maven-plugin:1.5.10.RELEASE:run (default-cli) @ camel-example-spring-boot-rest-swagger ---
-[...]
+
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::        (v2.0.0.RELEASE)
-[...]
-2017-03-05 14:55:44.032  INFO 15312 --- [           main] o.a.camel.spring.SpringCamelContext      : Total 4 routes, of which 4 are started.
-2017-03-05 14:55:44.034  INFO 15312 --- [           main] o.a.camel.spring.SpringCamelContext      : Apache Camel 2.22.0-SNAPSHOT (CamelContext: camel-1) started in 0.614 seconds
-2017-03-05 14:55:44.131  INFO 15312 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
-2017-03-05 14:55:44.140  INFO 15312 --- [           main] o.a.c.example.springboot.Application     : Started Application in 6.265 seconds (JVM running for 21.092)
+ :: Spring Boot ::        (v2.1.7.RELEASE)
+
+2019-09-30 01:55:37.086  INFO 24312 --- [           main] o.t.t.camel.contentenricher.Application  : Starting Application on PCANSAP with PID 24312 (C:\Programming\workspace_java\camel-contentenricher\target\classes started by ANSAP_ADMIN in C:\Programming\workspace_java\camel-contentenricher)
+2019-09-30 01:55:37.088  INFO 24312 --- [           main] o.t.t.camel.contentenricher.Application  : No active profile set, falling back to default profiles: default
+2019-09-30 01:55:37.851  INFO 24312 --- [           main] o.a.c.i.converter.DefaultTypeConverter   : Type converters loaded (core: 195, classpath: 10)
+2019-09-30 01:55:38.017  WARN 24312 --- [           main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2019-09-30 01:55:38.036  INFO 24312 --- [           main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2019-09-30 01:55:38.036  INFO 24312 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 922 ms
+2019-09-30 01:55:38.217  INFO 24312 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-30 01:55:38.465  INFO 24312 --- [           main] o.a.camel.spring.boot.RoutesCollector    : Loading additional Camel XML routes from: classpath:camel/*.xml
+2019-09-30 01:55:38.466  INFO 24312 --- [           main] o.a.camel.spring.boot.RoutesCollector    : Loading additional Camel XML rests from: classpath:camel-rest/*.xml
+2019-09-30 01:55:38.470  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Apache Camel 2.24.0 (CamelContext: camel-1) is starting
+2019-09-30 01:55:38.471  INFO 24312 --- [           main] o.a.c.m.ManagedManagementStrategy        : JMX is enabled
+2019-09-30 01:55:38.675  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Message DataType is enabled on CamelContext: camel-1
+2019-09-30 01:55:38.675  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+2019-09-30 01:55:38.700  INFO 24312 --- [           main] o.a.c.c.jackson.JacksonDataFormat        : Found single ObjectMapper in Registry to use: com.fasterxml.jackson.databind.ObjectMapper@2503ec73
+2019-09-30 01:55:38.711  INFO 24312 --- [           main] o.a.c.c.jackson.JacksonDataFormat        : Found single ObjectMapper in Registry to use: com.fasterxml.jackson.databind.ObjectMapper@2503ec73
+2019-09-30 01:55:38.721  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Route: route1 started and consuming from: direct://addressenricherbean
+2019-09-30 01:55:38.722  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Route: route2 started and consuming from: direct://addressenricherbean1
+2019-09-30 01:55:38.723  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Route: route3 started and consuming from: direct://addressenricher
+2019-09-30 01:55:38.723  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Total 3 routes, of which 3 are started
+2019-09-30 01:55:38.723  INFO 24312 --- [           main] o.a.camel.spring.SpringCamelContext      : Apache Camel 2.24.0 (CamelContext: camel-1) started in 0.254 seconds
+2019-09-30 01:55:38.727  INFO 24312 --- [           main] o.a.c.c.s.CamelHttpTransportServlet      : Initialized CamelHttpTransportServlet[name=CamelServlet, contextPath=]
+2019-09-30 01:55:38.734  INFO 24312 --- [           main] org.xnio                                 : XNIO version 3.3.8.Final
+2019-09-30 01:55:38.741  INFO 24312 --- [           main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2019-09-30 01:55:38.792  INFO 24312 --- [           main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 8090 (http) with context path ''
+2019-09-30 01:55:38.795  INFO 24312 --- [           main] o.t.t.camel.contentenricher.Application  : Started Application in 1.941 seconds (JVM running for 2.575)
+
 ----
 
-After the Spring Boot application is started, you can open the following URL in your web browser to access the REST endpoint and retrieve a list of users: http://localhost:8080/camel/users
+After the Spring Boot application is started, you can open the following URL in your web browser to access the REST endpoint and retrieve a address and user
 
 You can also access the REST endpoint from the command line:
 
 [source,text]
 ----
-$ curl http://localhost:8080/api/users
+$ curl http://localhost:8090/address/1/
+$ curl http://localhost:8090/user/2/
 ----
 
 The command will produce the following output:
 
 [source,json]
 ----
-[ {
-  "id" : 1,
-  "name" : "John Coltrane"
-}, {
-  "id" : 2,
-  "name" : "Miles Davis"
-}, {
-  "id" : 3,
-  "name" : "Sonny Rollins"
-} ]
+{
+    "addressLine1": "TIAA INDIA ",
+    "addressLine2": "TIAA INDIA 2 "
+}
+
+
 ----
 
-The Swagger documentation is located at: `\http://localhost:8080/api/api-doc` and can be retrieved with the following command:
+User response will produce below 
+----
+{
+    "id": 2,
+    "name": "Miles Davis",
+    "address": {
+        "addressLine1": "TIAA INDIA ",
+        "addressLine2": "TIAA INDIA 2 "
+    }
+}
+----
 
-[source,text]
-----
-$ curl http://localhost:8080/api/api-doc
-----
 
 The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
 
 == Help
 
-If you hit any problems please let us know on the http://camel.apache.org/discussion-forums.html[Camel Forums].
-
-Please help us make Apache Camel better - we appreciate any feedback you may have. Enjoy!
-
-The Camel riders!
+For any help please reach out to EAIP training group. 
