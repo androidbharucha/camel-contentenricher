@@ -2,7 +2,7 @@
 
 == Introduction
 
-This example shows how camel content enricher EAIP can be used to enrich data between APIs. User Rest end point uses  service spring to retrive user information and address rest  service to retrive address for the user. 
+This example shows how camel content enricher EAIP can be used to enrich data between APIs. User Rest end point uses  Spring service  to retrive user information and address rest  service to retrive address for the user. 
 
 == Build
 
