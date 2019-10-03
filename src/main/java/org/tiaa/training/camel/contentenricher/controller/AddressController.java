@@ -16,10 +16,10 @@ public class AddressController {
 
 	@Autowired
 	private AddressService addressService;
-	
+
 	@RequestMapping(value = "/{userid}/", method = RequestMethod.GET)
 	public ResponseEntity<Address> getAddressForUserId(@PathVariable String userid) {
-		
-			return new ResponseEntity<Address>(addressService.getAddressForUserId(userid),HttpStatus.OK);
+
+		return new ResponseEntity<Address>(addressService.getAddressForUserId(userid), HttpStatus.OK);
 	}
 }

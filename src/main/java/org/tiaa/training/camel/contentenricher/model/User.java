@@ -19,6 +19,8 @@ package org.tiaa.training.camel.contentenricher.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -35,6 +37,8 @@ public class User {
     private String name;
     
     private Address address ;
+    
+    private List<Transaction> transactions;
 
     public User() {
     }
@@ -66,6 +70,16 @@ public class User {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 
 	@Override

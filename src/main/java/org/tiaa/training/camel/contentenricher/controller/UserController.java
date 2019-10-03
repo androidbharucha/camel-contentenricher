@@ -12,23 +12,17 @@ import org.tiaa.training.camel.contentenricher.model.User;
 
 @RestController
 @RequestMapping(path = "/user")
-public class UserController  {
-	
+public class UserController {
+
 	@Autowired
 	private CamelContext camelContext;
-	
-	
+
 	@RequestMapping(value = "/{userid}/", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@PathVariable String userid) {
-		
-		System.out.println(camelContext.getRoutes());
-		
-		User userinfo = camelContext.createProducerTemplate().requestBody("direct:addressenricherbean",userid,User.class);
-		
-		
-		System.out.println(userinfo);
-		return new ResponseEntity<User>(userinfo,HttpStatus.OK);
+
+		User userinfo = camelContext.createProducerTemplate().requestBody("direct:userEnrichment", userid, User.class);
+
+		return new ResponseEntity<User>(userinfo, HttpStatus.OK);
 	}
 
-	
 }
